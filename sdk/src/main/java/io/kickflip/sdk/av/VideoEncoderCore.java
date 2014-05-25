@@ -50,6 +50,9 @@ public class VideoEncoderCore extends AndroidEncoder{
      * Configures encoder and muxer state, and prepares the input Surface.
      */
     public VideoEncoderCore(int width, int height, int bitRate, Muxer muxer) {
+        if(width < 640)
+            throw new RuntimeException("Output video widths < 640 will produce corrupted videos on some devices (Nexus 7)");
+        
         mMuxer = muxer;
         mBufferInfo = new MediaCodec.BufferInfo();
 
